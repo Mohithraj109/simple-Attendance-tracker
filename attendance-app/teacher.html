@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">📋 <span>AttendApp</span></div>
+    <nav>
+      <button class="nav-item active" onclick="showSection('attendance')">📅 &nbsp; Mark Attendance</button>
+      <button class="nav-item" onclick="showSection('students')">👥 &nbsp; Students</button>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="index.html" class="btn btn-ghost btn-full">← Back to Home</a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main-content">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="hamburger" onclick="toggleSidebar()">☰</button>
+        <h1 id="page-title">Mark Attendance</h1>
+      </div>
+      <div class="topbar-right">
+        <span style="font-size:13px;color:var(--gray-400);">Teacher View</span>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid" id="stats-grid"></div>
+
+    <!-- ── Attendance Section ── -->
+    <div id="section-attendance">
+      <div class="date-bar">
+        <label>📅 Date:</label>
+        <input type="date" id="att-date" onchange="loadAttendance()" />
+        <button id="holiday-btn" onclick="toggleHoliday()">🏖️ Mark as Holiday</button>
+        <button class="btn btn-primary btn-sm" onclick="saveAttendance()">💾 Save Attendance</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Roll No.</th>
+              <th>Class</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="att-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── Students Section ── -->
+    <div id="section-students" style="display:none;">
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="🔍  Search students..." oninput="renderStudents()" />
+        <button class="btn btn-primary" onclick="openAddModal()">+ Add Student</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Roll No.</th>
+              <th>Class</th>
+              <th>Attendance %</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="students-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Add/Edit Modal -->
+<div class="modal-overlay" id="modal" style="display:none;" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <h2 id="modal-title">Add Student</h2>
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" id="f-name" placeholder="e.g. Alice Johnson" />
+    </div>
+    <div class="form-group">
+      <label>Roll Number</label>
+      <input type="text" id="f-roll" placeholder="e.g. CS001" />
+    </div>
+    <div class="form-group">
+      <label>Class</label>
+      <input type="text" id="f-class" placeholder="e.g. 10-A" />
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary btn-full" onclick="saveStudent()">Save</button>
+      <button class="btn btn-ghost btn-full" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirm Modal -->
+<div class="modal-overlay" id="del-modal" style="display:none;" onclick="closeDelOutside(event)">
+  <div class="modal" style="max-width:340px;text-align:center;">
+    <div style="font-size:40px;margin-bottom:12px;">🗑️</div>
+    <h2>Delete Student?</h2>
+    <p style="color:var(--gray-400);font-size:14px;margin:8px 0 24px;">This will also remove all their attendance records.</p>
+    <div class="modal-footer">
+      <button class="btn btn-danger btn-full" onclick="confirmDelete()">Yes, Delete</button>
+      <button class="btn btn-ghost btn-full" onclick="closeDelModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/teacher.js"></script>
+</body>
+</html>
