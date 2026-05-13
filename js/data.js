@@ -84,17 +84,17 @@ const DB = {
     if (localStorage.getItem('seeded')) return;
 
     const students = [
-      { id: '1', name: 'Alice Johnson',  roll: 'CS001', class: '10-A' },
-      { id: '2', name: 'Bob Martinez',   roll: 'CS002', class: '10-A' },
-      { id: '3', name: 'Carol Williams', roll: 'CS003', class: '10-B' },
+      { id: '1', name: 'mohith',  roll: '814724104095', class: 'CSE-B' },
+      { id: '2', name: 'Irfan',   roll: '814724104091', class: 'CSE-B' },
+      { id: '3', name: 'Lavanya', roll: '814724104082', class: 'CSE-B' },
     ];
     this.saveStudents(students);
 
     // Generate 14 days of attendance
     const matrix = {
-      '1': ['P','P','P','P','P','P','P','P','P','P','P','P','P','P'],
-      '2': ['P','A','P','P','A','P','P','A','P','P','P','A','P','P'],
-      '3': ['P','P','A','P','P','P','A','P','P','A','P','P','P','A'],
+      '1': ['A','A','P','P','P','P','A','P','A','A','P','P','P','P'],
+      '2': ['P','A','P','P','P','P','P','P','P','P','P','A','P','P'],
+      '3': ['P','P','A','P','P','P','A','P','P','P','P','P','P','P'],
     };
 
     const att = {};
